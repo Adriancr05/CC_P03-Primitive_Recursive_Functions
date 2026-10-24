@@ -12,11 +12,9 @@
 #ifndef PRIMITIVE_RECURSIVE_FUNCTION_H
 #define PRIMITIVE_RECURSIVE_FUNCTION_H
 
-#include <memory>
 #include <vector>
-
-using Natural = unsigned long long;
-using Arguments = std::vector<Natural>;
+#include <limits>
+#include <stdexcept>
 
 // Base class of every (basic or derived) primitive recursive function.
 class PrimitiveRecursiveFunction {
@@ -24,31 +22,29 @@ class PrimitiveRecursiveFunction {
   virtual ~PrimitiveRecursiveFunction() = default;
 
   // Evaluates the function and counts the call.
-  Natural operator()(const Arguments& arguments) const;
+  unsigned operator()(const std::vector<unsigned>& arguments) const;
 
   static unsigned long long calls() { return calls_; }
-  static void ResetCalls() { calls_ = 0; }
+  static void reset_calls() { calls_ = 0; }
 
  protected:
-  virtual Natural Evaluate(const Arguments& arguments) const = 0;
-  static void AddCalls(unsigned long long amount) { calls_ += amount; }
+  virtual unsigned evaluate(const std::vector<unsigned>& arguments) const = 0;
+  static void add_calls(unsigned long long amount) { calls_ += amount; }
 
  private:
   static inline unsigned long long calls_ = 0;
 };
 
-using FunctionPtr = std::shared_ptr<const PrimitiveRecursiveFunction>;
-
 // Basic function: Z(x1..xn) = 0
 class Zero : public PrimitiveRecursiveFunction {
  protected:
-  Natural Evaluate(const Arguments& arguments) const override;
+  unsigned evaluate(const std::vector<unsigned>& arguments) const override;
 };
 
 // Basic function: S(x) = x + 1
 class Successor : public PrimitiveRecursiveFunction {
  protected:
-  Natural Evaluate(const Arguments& arguments) const override;
+  unsigned evaluate(const std::vector<unsigned>& arguments) const override;
 };
 
 // Basic function: P_i(x1..xn) = xi (index is 1-based)
@@ -56,40 +52,48 @@ class Projection : public PrimitiveRecursiveFunction {
  public:
   explicit Projection(size_t index) : index_(index) {}
  protected:
-  Natural Evaluate(const Arguments& arguments) const override;
+  unsigned evaluate(const std::vector<unsigned>& arguments) const override;
  private:
   size_t index_;
 };
 
-// Combination + composition: f(g1(x), ..., gm(x))
+// Combination + composition: f(g1(x), ..., gm(x)).
+// Takes ownership of 'outer' and of every function in 'inner'.
 class Composition : public PrimitiveRecursiveFunction {
  public:
-  Composition(FunctionPtr outer, std::vector<FunctionPtr> inner)
-      : outer_(std::move(outer)), inner_(std::move(inner)) {}
+  Composition(const PrimitiveRecursiveFunction* outer, std::vector<const PrimitiveRecursiveFunction*> inner)
+      : outer_(outer), inner_(std::move(inner)) {}
+  ~Composition() override;
+  Composition(const Composition&) = delete;
+  Composition& operator=(const Composition&) = delete;
  protected:
-  Natural Evaluate(const Arguments& arguments) const override;
+  unsigned evaluate(const std::vector<unsigned>& arguments) const override;
  private:
-  FunctionPtr outer_;
-  std::vector<FunctionPtr> inner_;
+  const PrimitiveRecursiveFunction* outer_;
+  std::vector<const PrimitiveRecursiveFunction*> inner_;
 };
 
 // Primitive recursion on the last argument:
 //   f(x, 0)   = base(x)
 //   f(x, y+1) = step(x, y, f(x, y))
+// Takes ownership of 'base' and 'step'.
 class Recursion : public PrimitiveRecursiveFunction {
  public:
-  Recursion(FunctionPtr base, FunctionPtr step)
-      : base_(std::move(base)), step_(std::move(step)) {}
+  Recursion(const PrimitiveRecursiveFunction* base, const PrimitiveRecursiveFunction* step) : base_(base), step_(step) {}
+  ~Recursion() override;
+  Recursion(const Recursion&) = delete;
+  Recursion& operator=(const Recursion&) = delete;
  protected:
-  Natural Evaluate(const Arguments& arguments) const override;
+  unsigned evaluate(const std::vector<unsigned>& arguments) const override;
  private:
-  FunctionPtr base_;
-  FunctionPtr step_;
+  const PrimitiveRecursiveFunction* base_;
+  const PrimitiveRecursiveFunction* step_;
 };
 
 // Derived functions built only from the pieces above.
-FunctionPtr MakeSum();      // sum(x, y)
-FunctionPtr MakeProduct();  // product(x, y)
-FunctionPtr MakePower();    // potencia(x, y) = x^y
+// The caller owns the returned pointer and must delete it.
+const PrimitiveRecursiveFunction* MakeSum();      // sum(x, y)
+const PrimitiveRecursiveFunction* MakeProduct();  // product(x, y)
+const PrimitiveRecursiveFunction* MakePower();    // power(x, y) = x^y
 
 #endif  // PRIMITIVE_RECURSIVE_FUNCTION_H
