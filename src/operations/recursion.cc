@@ -25,10 +25,10 @@ unsigned Recursion::evaluate(const std::vector<unsigned>& arguments) const {
   std::vector<unsigned> params(arguments.begin(), arguments.end() - 1);
   const unsigned y = arguments.back();
   unsigned accumulator = (*base_)(params);
-  for (unsigned k = 0; k < y; ++k) {
+  for (unsigned i = 0; i < y; ++i) {
     add_calls(1);
     std::vector<unsigned> step_arguments = params;
-    step_arguments.push_back(k);
+    step_arguments.push_back(i);
     step_arguments.push_back(accumulator);
     accumulator = (*step_)(step_arguments);
   }
