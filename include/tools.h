@@ -17,7 +17,7 @@
 #include <iostream>
 #include <stdexcept>
 
-#include "../include/primitive_recursive_function.h"
+#include "../primitive_recursive_function.h"
 
 // Stores command-line arguments including file paths.
 struct args {
