@@ -11,13 +11,15 @@
 
 #include "../../include/operations/recursion.h"
 
+// Destructor: frees the base and step functions
 Recursion::~Recursion() {
   delete base_;
   delete step_;
 }
 
-// Evaluated iteratively to avoid stack overflow with large exponents. Each unfolded
-// step f(x, k+1) is still counted as a call, so the count matches the recursive definition.
+// Primitive recursion:
+//   f(x, 0) = g(x)
+//   f(x, y + 1) = h(x, y, f(x, y))
 unsigned Recursion::evaluate(const std::vector<unsigned>& arguments) const {
   if (arguments.empty()) throw std::invalid_argument("Recursion expects at least 1 argument");
   std::vector<unsigned> params(arguments.begin(), arguments.end() - 1);

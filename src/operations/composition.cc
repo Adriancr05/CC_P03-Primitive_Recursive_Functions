@@ -11,11 +11,13 @@
 
 #include "../../include/operations/composition.h"
 
+// Destructor: frees the outer function and all inner functions
 Composition::~Composition() {
   delete outer_;
   for (const PrimitiveRecursiveFunction* function : inner_) delete function;
 }
 
+// Combination + composition: f(g_1(x), ..., g_n(x)).
 unsigned Composition::evaluate(const std::vector<unsigned>& arguments) const {
   std::vector<unsigned> values;
   values.reserve(inner_.size());

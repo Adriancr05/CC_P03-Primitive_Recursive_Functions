@@ -14,10 +14,10 @@
 
 #include "../primitive_recursive_function.h"
 
-// Basic function: Z(x) = 0
+// Zero function: Z(x) = 0
 class Zero : public PrimitiveRecursiveFunction {
  private:
-  unsigned evaluate(const std::vector<unsigned>& arguments) const override;
+  unsigned evaluate(const std::vector<unsigned>&) const override;
 };
 
 #endif  // ZERO_H

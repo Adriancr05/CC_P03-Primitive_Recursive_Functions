@@ -16,10 +16,10 @@
 #include "../basic_functions.h"
 #include "../primitive_recursive_function.h"
 
-// Basic function: Z(x) = 0
+// Sum function: sum(x, y) = x + y
 class Sum : public PrimitiveRecursiveFunction {
  private:
-  unsigned evaluate(const std::vector<unsigned>& arguments) const override;
+  unsigned evaluate(const std::vector<unsigned>&) const override;
 };
 
 #endif  // SUM_H

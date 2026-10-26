@@ -17,10 +17,10 @@
 
 #include "../primitive_recursive_function.h"
 
-// Basic function: S(x) = x + 1
+// Successor function: S(x) = x + 1
 class Successor : public PrimitiveRecursiveFunction {
  private:
-  unsigned evaluate(const std::vector<unsigned>& arguments) const override;
+  unsigned evaluate(const std::vector<unsigned>&) const override;
 };
 
 #endif  // SUCCESSOR_H

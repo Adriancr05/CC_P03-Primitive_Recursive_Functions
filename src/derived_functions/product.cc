@@ -11,17 +11,18 @@
 
 #include "../../include/derived_functions/product.h"
 
-unsigned Product::evaluate(const std::vector<unsigned>&) const {
-  return 0;
-}
-
-// product(x, 0) = Z(x);  product(x, y+1) = sum(P1(x, y, r), P3(x, y, r))
-const PrimitiveRecursiveFunction* make_product() {
+// product: ℕ × ℕ → ℕ
+// product(x, 0) = g(x) = Z(x)
+// product(x, y + 1) = h(x, y, product(x, y)) = sum(P^3_1(x, y, product(x, y)), P^3_3(x, y, product(x, y)))
+unsigned Product::evaluate(const std::vector<unsigned>& arguments) const {
   const PrimitiveRecursiveFunction* base = new Zero();
   const PrimitiveRecursiveFunction* step = new Composition(
-    make_sum(),
-    std::vector<const PrimitiveRecursiveFunction*>{new Projection(1),
-    new Projection(3)}
+    new Sum(),
+    std::vector<const PrimitiveRecursiveFunction*>{
+      new Projection(1),
+      new Projection(3)
+    }
   );
-  return new Recursion(base, step);
+  const PrimitiveRecursiveFunction* product = new Recursion(base, step);
+  return (*product)(arguments);
 }

@@ -18,20 +18,14 @@
 class PrimitiveRecursiveFunction {
  public:
   virtual ~PrimitiveRecursiveFunction() = default;
-  unsigned operator()(const std::vector<unsigned>& arguments) const;
+  unsigned operator()(const std::vector<unsigned>&) const;
   static unsigned long long calls() { return calls_; }
   static void reset_calls() { calls_ = 0; }
  protected:
   static void add_calls(unsigned long long amount) { calls_ += amount; }
  private:
   static inline unsigned long long calls_ = 0;
-  virtual unsigned evaluate(const std::vector<unsigned>& arguments) const = 0;
+  virtual unsigned evaluate(const std::vector<unsigned>&) const = 0;
 };
-
-// Derived functions built only from the pieces above.
-// The caller owns the returned pointer and must delete it.
-const PrimitiveRecursiveFunction* make_sum();      // sum(x, y)
-const PrimitiveRecursiveFunction* make_product();  // product(x, y)
-const PrimitiveRecursiveFunction* make_power();    // power(x, y) = x^y
 
 #endif  // PRIMITIVE_RECURSIVE_FUNCTION_H

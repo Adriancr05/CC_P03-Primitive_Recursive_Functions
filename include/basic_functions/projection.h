@@ -14,13 +14,13 @@
 
 #include "../primitive_recursive_function.h"
 
-// Basic function: P^n_i(x_1..x_n) = x_i
+// Projection function: P^n_i(x_1..x_n) = x_i
 class Projection : public PrimitiveRecursiveFunction {
  public:
   explicit Projection(size_t index) : index_(index) {}
  private:
   size_t index_;
-  unsigned evaluate(const std::vector<unsigned>& arguments) const override;
+  unsigned evaluate(const std::vector<unsigned>&) const override;
 };
 
 #endif  // PROJECTION_H

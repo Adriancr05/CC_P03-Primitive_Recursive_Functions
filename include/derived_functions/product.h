@@ -12,14 +12,12 @@
 #ifndef PRODUCT_H
 #define PRODUCT_H
 
-#include "../operations.h"
-#include "../basic_functions.h"
-#include "../primitive_recursive_function.h"
+#include "sum.h"
 
-// Basic function: Z(x) = 0
+// Product function: product(x, y) = x * y
 class Product : public PrimitiveRecursiveFunction {
  private:
-  unsigned evaluate(const std::vector<unsigned>& arguments) const override;
+  unsigned evaluate(const std::vector<unsigned>&) const override;
 };
 
 #endif  // PRODUCT_H

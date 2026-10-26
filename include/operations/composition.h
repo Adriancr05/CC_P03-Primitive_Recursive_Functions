@@ -14,8 +14,7 @@
 
 #include "../primitive_recursive_function.h"
 
-// Combination + composition: f(g1(x), ..., gm(x)).
-// Takes ownership of 'outer' and of every function in 'inner'.
+// Combination + composition: f(g_1(x), ..., g_n(x)).
 class Composition : public PrimitiveRecursiveFunction {
  public:
   Composition(const PrimitiveRecursiveFunction* outer, std::vector<const
@@ -26,7 +25,7 @@ class Composition : public PrimitiveRecursiveFunction {
  private:
   const PrimitiveRecursiveFunction* outer_;
   std::vector<const PrimitiveRecursiveFunction*> inner_;
-  unsigned evaluate(const std::vector<unsigned>& arguments) const override;
+  unsigned evaluate(const std::vector<unsigned>&) const override;
 };
 
 #endif  // COMPOSITION_H

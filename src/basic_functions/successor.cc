@@ -11,6 +11,8 @@
 
 #include "../../include/basic_functions/successor.h"
 
+// S: ℕ → ℕ
+// S(x) = x + 1
 unsigned Successor::evaluate(const std::vector<unsigned>& arguments) const {
   if (arguments.size() != 1) throw std::invalid_argument("Successor expects 1 argument");
   if (arguments[0] == std::numeric_limits<unsigned>::max()) {

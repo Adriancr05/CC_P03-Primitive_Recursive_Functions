@@ -17,7 +17,7 @@
 #include <iostream>
 #include <stdexcept>
 
-#include "../primitive_recursive_function.h"
+#include "../include/derived_functions/power.h"
 
 // Stores command-line arguments including file paths.
 struct args {

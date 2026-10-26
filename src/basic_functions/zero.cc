@@ -11,6 +11,8 @@
 
 #include "../../include/basic_functions/zero.h"
 
+// Z: ℕ → ℕ
+// Z(x) = 0
 unsigned Zero::evaluate(const std::vector<unsigned>&) const {
   return 0;
 }

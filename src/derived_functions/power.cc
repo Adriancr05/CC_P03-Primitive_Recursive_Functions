@@ -11,20 +11,21 @@
 
 #include "../../include/derived_functions/power.h"
 
-unsigned Power::evaluate(const std::vector<unsigned>&) const {
-  return 0;
-}
-
-// power(x, 0) = S(Z(x));  power(x, y+1) = product(P1(x, y, r), P3(x, y, r))
-const PrimitiveRecursiveFunction* make_power() {
+// power: ℕ × ℕ → ℕ
+// power(x, 0) = S(Z(x))
+// power(x, y+1) = h(x, y, power(x, y)) = product(P^3_1(x, y, power(x, y)), P^3_3(x, y, power(x, y)))
+unsigned Power::evaluate(const std::vector<unsigned>& arguments) const {
   const PrimitiveRecursiveFunction* base = new Composition(
     new Successor(),
     std::vector<const PrimitiveRecursiveFunction*>{new Zero()}
   );
   const PrimitiveRecursiveFunction* step = new Composition(
-    make_product(),
-    std::vector<const PrimitiveRecursiveFunction*>{new Projection(1),
-    new Projection(3)}
+    new Product(),
+    std::vector<const PrimitiveRecursiveFunction*>{
+      new Projection(1),
+      new Projection(3)
+    }
   );
-  return new Recursion(base, step);
+  const PrimitiveRecursiveFunction* power =  new Recursion(base, step);
+  return (*power)(arguments);
 }

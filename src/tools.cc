@@ -65,9 +65,9 @@ args parse_args(int argc, char* argv[]) {
 
 // Builds the power function, evaluates it and prints the result and the number of calls.
 void execute_power(const args& options) {
-  const PrimitiveRecursiveFunction* power = make_power();
+  Power power;
   PrimitiveRecursiveFunction::reset_calls();
-  unsigned result = (*power)({options.x, options.y});
+  unsigned result = power({options.x, options.y});
   std::cout << "Result: " << result << std::endl;
   std::cout << "Function calls: " << PrimitiveRecursiveFunction::calls() << std::endl;
 }

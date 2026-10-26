@@ -12,14 +12,12 @@
 #ifndef POWER_H
 #define POWER_H
 
-#include "../operations.h"
-#include "../basic_functions.h"
-#include "../primitive_recursive_function.h"
+#include "product.h"
 
-// Basic function: Z(x) = 0
+// Power function: power(x, y) = x^y
 class Power : public PrimitiveRecursiveFunction {
  private:
-  unsigned evaluate(const std::vector<unsigned>& arguments) const override;
+  unsigned evaluate(const std::vector<unsigned>&) const override;
 };
 
 #endif  // POWER_H

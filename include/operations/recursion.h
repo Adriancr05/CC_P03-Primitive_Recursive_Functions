@@ -14,10 +14,7 @@
 
 #include "../primitive_recursive_function.h"
 
-// Primitive recursion on the last argument:
-//   f(x, 0)   = base(x)
-//   f(x, y+1) = step(x, y, f(x, y))
-// Takes ownership of 'base' and 'step'.
+// Primitive recursion operator: builds f from base and step functions
 class Recursion : public PrimitiveRecursiveFunction {
  public:
   Recursion(const PrimitiveRecursiveFunction* base, const
@@ -28,7 +25,7 @@ class Recursion : public PrimitiveRecursiveFunction {
  private:
   const PrimitiveRecursiveFunction* base_;
   const PrimitiveRecursiveFunction* step_;
-  unsigned evaluate(const std::vector<unsigned>& arguments) const override;
+  unsigned evaluate(const std::vector<unsigned>&) const override;
 };
 
 #endif  // RECURSION_H
