@@ -14,15 +14,13 @@
 // product: ℕ × ℕ → ℕ
 // product(x, 0) = g(x) = Z(x)
 // product(x, y + 1) = h(x, y, product(x, y)) = sum(P^3_1(x, y, product(x, y)), P^3_3(x, y, product(x, y)))
-unsigned Product::evaluate(const std::vector<unsigned>& arguments) const {
-  const PrimitiveRecursiveFunction* base = new Zero();
-  const PrimitiveRecursiveFunction* step = new Composition(
+Product::Product() : Recursion(
+  new Zero(),
+  new Composition(
     new Sum(),
     std::vector<const PrimitiveRecursiveFunction*>{
       new Projection(1),
       new Projection(3)
     }
-  );
-  const PrimitiveRecursiveFunction* product = new Recursion(base, step);
-  return (*product)(arguments);
-}
+  )
+) {}

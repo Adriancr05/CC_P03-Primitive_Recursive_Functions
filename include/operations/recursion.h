@@ -25,6 +25,7 @@ class Recursion : public PrimitiveRecursiveFunction {
  private:
   const PrimitiveRecursiveFunction* base_;
   const PrimitiveRecursiveFunction* step_;
+  bool counts_as_call() const override { return true; }
   unsigned evaluate(const std::vector<unsigned>&) const override;
 };
 

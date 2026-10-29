@@ -15,9 +15,9 @@
 #include "sum.h"
 
 // Product function: product(x, y) = x * y
-class Product : public PrimitiveRecursiveFunction {
- private:
-  unsigned evaluate(const std::vector<unsigned>&) const override;
+class Product : public Recursion {
+ public:
+  Product();
 };
 
 #endif  // PRODUCT_H

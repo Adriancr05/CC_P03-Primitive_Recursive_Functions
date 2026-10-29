@@ -13,6 +13,6 @@
 
 // Evaluates the function and counts the call.
 unsigned PrimitiveRecursiveFunction::operator()(const std::vector<unsigned>& arguments) const {
-  calls_++;
+  if (counts_as_call()) calls_++;
   return evaluate(arguments);
 }

@@ -25,6 +25,7 @@ class PrimitiveRecursiveFunction {
   static void add_calls(unsigned long long amount) { calls_ += amount; }
  private:
   static inline unsigned long long calls_ = 0;
+  virtual bool counts_as_call() const { return true; }
   virtual unsigned evaluate(const std::vector<unsigned>&) const = 0;
 };
 

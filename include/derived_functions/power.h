@@ -15,9 +15,9 @@
 #include "product.h"
 
 // Power function: power(x, y) = x^y
-class Power : public PrimitiveRecursiveFunction {
- private:
-  unsigned evaluate(const std::vector<unsigned>&) const override;
+class Power : public Recursion {
+ public:
+  Power();
 };
 
 #endif  // POWER_H

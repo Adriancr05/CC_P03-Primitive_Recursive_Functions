@@ -16,7 +16,7 @@
 unsigned Successor::evaluate(const std::vector<unsigned>& arguments) const {
   if (arguments.size() != 1) throw std::invalid_argument("Successor expects 1 argument");
   if (arguments[0] == std::numeric_limits<unsigned>::max()) {
-    throw std::overflow_error("Error: the result does not fit in a 64-bit unsigned number");
+    throw std::overflow_error("Error: the result does not fit in a 32-bit unsigned number");
   }
   return arguments[0] + 1;
 }

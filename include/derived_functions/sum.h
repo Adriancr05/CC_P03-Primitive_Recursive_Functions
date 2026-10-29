@@ -17,9 +17,9 @@
 #include "../primitive_recursive_function.h"
 
 // Sum function: sum(x, y) = x + y
-class Sum : public PrimitiveRecursiveFunction {
- private:
-  unsigned evaluate(const std::vector<unsigned>&) const override;
+class Sum : public Recursion {
+ public:
+  Sum();
 };
 
 #endif  // SUM_H

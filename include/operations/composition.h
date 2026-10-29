@@ -25,6 +25,7 @@ class Composition : public PrimitiveRecursiveFunction {
  private:
   const PrimitiveRecursiveFunction* outer_;
   std::vector<const PrimitiveRecursiveFunction*> inner_;
+  bool counts_as_call() const override { return false; }
   unsigned evaluate(const std::vector<unsigned>&) const override;
 };
 
