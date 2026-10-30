@@ -20,7 +20,7 @@
 // Successor function: S(x) = x + 1
 class Successor : public PrimitiveRecursiveFunction {
  private:
-  unsigned evaluate(const std::vector<unsigned>&) const override;
+  unsigned long long evaluate(const std::vector<unsigned long long>&) const override;
 };
 
 #endif  // SUCCESSOR_H

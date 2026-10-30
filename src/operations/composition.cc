@@ -18,8 +18,8 @@ Composition::~Composition() {
 }
 
 // Combination + composition: f(g_1(x), ..., g_n(x)).
-unsigned Composition::evaluate(const std::vector<unsigned>& arguments) const {
-  std::vector<unsigned> values;
+unsigned long long Composition::evaluate(const std::vector<unsigned long long>& arguments) const {
+  std::vector<unsigned long long> values;
   values.reserve(inner_.size());
   for (const PrimitiveRecursiveFunction* function : inner_) values.push_back((*function)(arguments));
   return (*outer_)(values);

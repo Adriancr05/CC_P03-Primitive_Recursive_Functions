@@ -17,7 +17,7 @@
 // Zero function: Z(x) = 0
 class Zero : public PrimitiveRecursiveFunction {
  private:
-  unsigned evaluate(const std::vector<unsigned>&) const override;
+  unsigned long long evaluate(const std::vector<unsigned long long>&) const override;
 };
 
 #endif  // ZERO_H

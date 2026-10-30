@@ -21,8 +21,8 @@
 
 // Stores command-line arguments including file paths.
 struct args {
-  unsigned x = 0;
-  unsigned y = 0;
+  unsigned long long x = 0;
+  unsigned long long y = 0;
   bool show_help = false;
 };
 

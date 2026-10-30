@@ -18,7 +18,7 @@
 class PrimitiveRecursiveFunction {
  public:
   virtual ~PrimitiveRecursiveFunction() = default;
-  unsigned operator()(const std::vector<unsigned>&) const;
+  unsigned long long operator()(const std::vector<unsigned long long>&) const;
   static unsigned long long calls() { return calls_; }
   static void reset_calls() { calls_ = 0; }
  protected:
@@ -26,7 +26,7 @@ class PrimitiveRecursiveFunction {
  private:
   static inline unsigned long long calls_ = 0;
   virtual bool counts_as_call() const { return true; }
-  virtual unsigned evaluate(const std::vector<unsigned>&) const = 0;
+  virtual unsigned long long evaluate(const std::vector<unsigned long long>&) const = 0;
 };
 
 #endif  // PRIMITIVE_RECURSIVE_FUNCTION_H

@@ -12,6 +12,8 @@
 #ifndef PROJECTION_H
 #define PROJECTION_H
 
+#include <stdexcept>
+
 #include "../primitive_recursive_function.h"
 
 // Projection function: P^n_i(x_1..x_n) = x_i
@@ -20,7 +22,7 @@ class Projection : public PrimitiveRecursiveFunction {
   explicit Projection(size_t index) : index_(index) {}
  private:
   size_t index_;
-  unsigned evaluate(const std::vector<unsigned>&) const override;
+  unsigned long long evaluate(const std::vector<unsigned long long>&) const override;
 };
 
 #endif  // PROJECTION_H

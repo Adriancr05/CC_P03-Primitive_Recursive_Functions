@@ -17,26 +17,23 @@ void show_help() {
 }
 
 // Parses a non-negative integer, rejecting signs, trailing garbage and values above max.
-unsigned parse_unsigned(const std::string& value) {
+unsigned long long parse_unsigned(const std::string& value) {
   if (value[0] == '-') {
     throw std::invalid_argument("Error: negative values are not allowed");
   }
   size_t pos = 0;
-  unsigned long temp = 0;
+  unsigned long long temp = 0;
   try {
-    temp = std::stoul(value, &pos);
-  } catch (const std::invalid_argument& exception) {
+    temp = std::stoull(value, &pos);
+  } catch (const std::invalid_argument&) {
     throw std::invalid_argument("Error: '" + value + "' is not a number");
-  } catch (const std::out_of_range& exception) {
+  } catch (const std::out_of_range&) {
     throw std::out_of_range("Error: the value '" + value + "' is too large");
-  }
-  if (temp > std::numeric_limits<unsigned>::max()) {
-    throw std::out_of_range("Error: the value '" + value + "' is too large for unsigned");
   }
   if (pos != value.size()) {
     throw std::invalid_argument("Error: leftover characters in '" + value + "'");
   }
-  return static_cast<unsigned>(temp);
+  return temp;
 }
 
 // Parses command-line arguments and returns an args structure with the options.
@@ -67,7 +64,7 @@ args parse_args(int argc, char* argv[]) {
 void execute_power(const args& options) {
   Power power;
   PrimitiveRecursiveFunction::reset_calls();
-  unsigned result = power({options.x, options.y});
+  unsigned long long result = power({options.x, options.y});
   std::cout << "Result: " << result << std::endl;
   std::cout << "Function calls: " << PrimitiveRecursiveFunction::calls() << std::endl;
 }

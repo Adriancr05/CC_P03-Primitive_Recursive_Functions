@@ -13,6 +13,6 @@
 
 // Z: ℕ → ℕ
 // Z(x) = 0
-unsigned Zero::evaluate(const std::vector<unsigned>&) const {
+unsigned long long Zero::evaluate(const std::vector<unsigned long long>&) const {
   return 0;
 }

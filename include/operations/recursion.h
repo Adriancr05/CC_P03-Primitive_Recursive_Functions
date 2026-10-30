@@ -12,6 +12,8 @@
 #ifndef RECURSION_H
 #define RECURSION_H
 
+#include <stdexcept>
+
 #include "../primitive_recursive_function.h"
 
 // Primitive recursion operator: builds f from base and step functions
@@ -26,7 +28,7 @@ class Recursion : public PrimitiveRecursiveFunction {
   const PrimitiveRecursiveFunction* base_;
   const PrimitiveRecursiveFunction* step_;
   bool counts_as_call() const override { return true; }
-  unsigned evaluate(const std::vector<unsigned>&) const override;
+  unsigned long long evaluate(const std::vector<unsigned long long>&) const override;
 };
 
 #endif  // RECURSION_H

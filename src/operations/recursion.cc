@@ -20,13 +20,13 @@ Recursion::~Recursion() {
 // Primitive recursion:
 //   f(x, 0) = g(x)
 //   f(x, y + 1) = h(x, y, f(x, y))
-unsigned Recursion::evaluate(const std::vector<unsigned>& arguments) const {
+unsigned long long Recursion::evaluate(const std::vector<unsigned long long>& arguments) const {
   if (arguments.empty()) throw std::invalid_argument("Recursion expects at least 1 argument");
-  std::vector<unsigned> params(arguments.begin(), arguments.end() - 1);
-  const unsigned y = arguments.back();
-  unsigned accumulator = (*base_)(params);
-  for (unsigned i = 0; i < y; ++i) {
-    std::vector<unsigned> step_arguments = params;
+  std::vector<unsigned long long> params(arguments.begin(), arguments.end() - 1);
+  const unsigned long long y = arguments.back();
+  unsigned long long accumulator = (*base_)(params);
+  for (unsigned long long i = 0; i < y; ++i) {
+    std::vector<unsigned long long> step_arguments = params;
     step_arguments.push_back(i);
     step_arguments.push_back(accumulator);
     accumulator = (*step_)(step_arguments);

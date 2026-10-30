@@ -12,7 +12,7 @@
 #include "../include/primitive_recursive_function.h"
 
 // Evaluates the function and counts the call.
-unsigned PrimitiveRecursiveFunction::operator()(const std::vector<unsigned>& arguments) const {
+unsigned long long PrimitiveRecursiveFunction::operator()(const std::vector<unsigned long long>& arguments) const {
   if (counts_as_call()) calls_++;
   return evaluate(arguments);
 }

@@ -13,7 +13,7 @@
 
 // P^n_i: ℕ^n → ℕ
 // P^n_i(x_1..x_n) = x_i
-unsigned Projection::evaluate(const std::vector<unsigned>& arguments) const {
+unsigned long long Projection::evaluate(const std::vector<unsigned long long>& arguments) const {
   if (index_ == 0 || index_ > arguments.size()) {
     throw std::invalid_argument("Projection index out of range");
   }
